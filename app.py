@@ -1,7 +1,8 @@
 import streamlit as st
 from streamlit_mic_recorder import speech_to_text
 from deep_translator import GoogleTranslator
-from gtts import gTTS
+import edge_tts
+import asyncio
 import base64
 import os
 import io
@@ -91,6 +92,13 @@ st.sidebar.markdown("### ⚙️ Settings / सेटिंग्ज")
 source_lang = st.sidebar.selectbox("Input Language / भाषा निवडा", ["English", "Hindi", "French"])
 lang_map = {"English": "en", "Hindi": "hi", "French": "fr"}
 
+# Voice Settings
+voice_gender = st.sidebar.selectbox("Select Voice / आवाज निवडा", ["Female (Aarohi)", "Male (Manohar)"])
+voice_map = {
+    "Female (Aarohi)": "mr-IN-AarohiNeural",
+    "Male (Manohar)": "mr-IN-ManoharNeural"
+}
+
 col1, col2 = st.columns(2, gap="large")
 
 with col1:
@@ -105,7 +113,7 @@ with col1:
         key='STT'
     )
     
-    # 2. Text Input Option (Better for Mobile than Text Area)
+    # 2. Text Input Option
     t_input = st.text_input("Or type here / किंवा येथे टाइप करा:", placeholder="Enter text and click Translate...")
     
     # Mobile-friendly Submit Button
@@ -114,6 +122,14 @@ with col1:
 
     # Logic: Priority to Voice, then Text upon button click or text submission
     final_input = v_input if v_input else (t_input if translate_btn else None)
+
+async def text_to_speech_edge(text, voice_name):
+    communicate = edge_tts.Communicate(text, voice_name)
+    audio_data = b""
+    async for chunk in communicate.stream():
+        if chunk["type"] == "audio":
+            audio_data += chunk["data"]
+    return audio_data
 
 with col2:
     st.markdown('<div class="marathi-card">', unsafe_allow_html=True)
@@ -127,15 +143,14 @@ with col2:
             # Display results
             st.markdown(f'<p class="marathi-text-result">{translated}</p>', unsafe_allow_html=True)
             
-            # Generate and Play Audio
+            # Generate and Play Audio (Edge-TTS)
             try:
-                tts = gTTS(text=translated, lang='mr')
-                audio_fp = io.BytesIO()
-                tts.write_to_fp(audio_fp)
-                st.audio(audio_fp, format='audio/mp3')
-                st.caption("🔊 Listen to translation / भाषांतर ऐका")
+                selected_voice = voice_map[voice_gender]
+                audio_bytes = asyncio.run(text_to_speech_edge(translated, selected_voice))
+                st.audio(audio_bytes, format='audio/mp3')
+                st.caption(f"🔊 Playing in {voice_gender}'s voice")
             except Exception as e:
-                st.error("Audio generation failed. Please try again.")
+                st.error("Audio generation failed. Please check internet connection.")
             
             # Clear button
             if st.button("🗑️ Clear / साफ करा"):
