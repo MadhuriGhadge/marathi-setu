@@ -1,6 +1,10 @@
+asyncio
+gtts
 streamlit
 streamlit-mic-recorder
 deep-translator
 edge-tts
-asyncio
-gtts
+easyocr
+opencv-python-headless
+numpy
+Pillow
