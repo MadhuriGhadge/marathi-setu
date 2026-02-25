@@ -1,4 +1,4 @@
-# 🚩 मराठी सेतू (Marathi Setu)
+# मराठी सेतू (Marathi Setu)
 
 **Marathi Setu** is a premium, AI-powered language bridge rapid prototype designed to seamlessly translate multiple languages into Marathi with high-fidelity neural voice playback.
 try it out at : https://marathi-setu.streamlit.app/
