@@ -1,22 +1,26 @@
 # मराठी सेतू (Marathi Setu)
 
-**Marathi Setu** is a premium, AI-powered language bridge rapid prototype designed to seamlessly translate multiple languages into Marathi with high-fidelity neural voice playback.
-try it out at : https://marathi-setu.streamlit.app/
+**Marathi Setu** is a premium, AI-powered language bridge designed to seamlessly translate text, voice, and documents into Marathi with high-fidelity neural voice playback.
+
+[Try it out here](https://marathi-setu.streamlit.app/)
+
 ---
 
 ## ✨ Features
 
-- **Multi-Language Translation**: Translate from **English, Hindi, and French** into Marathi using advanced AI models.
-- **Voice & Text Input**: 
-  - **Speech-to-Text**: Simply click to speak and let the app transcribe your words.
-  - **Text Input**: Type manually if you prefer.
-- **Neural Text-to-Speech (TTS)**: Experience crystal-clear, natural-sounding Marathi speech with two distinct voices:
+- **Multi-Language Translation**: Translate from **English, Hindi, and French** into Marathi using advanced AI.
+- **🎙️ Voice & Text Tab**:
+  - **Speech-to-Text**: Real-time voice capture with high-quality transcription.
+  - **Text Input**: Direct typing for quick translations.
+- **📸 OCR Document Scanner Tab**:
+  - **Vision AI**: Upload images or photos of documents (English/Hindi) and let the AI extract and translate the text instantly.
+- **🔊 Neural Text-to-Speech (TTS)**: Natural-sounding Marathi speech with two distinct voices:
   - **Aarohi (Female)**: A smooth, friendly neural voice.
   - **Manohar (Male)**: A clear, professional neural voice.
-- **Premium UI/UX**:
-  - **Lohit Marathi Font**: Native font integration for a clean, traditional look.
-  - **Glassmorphism Design**: Modern, semi-transparent "cards" for a sleek interface.
-  - **Responsive Layout**: Optimized for both desktop and mobile viewing.
+- **💎 Premium UI/UX**:
+  - **Lohit Marathi Font**: Native font integration for traditional Marathi typography.
+  - **Glassmorphism Design**: Modern, semi-transparent interface with smooth animations.
+  - **Responsive Layout**: Optimized for desktop, tablets, and mobile.
 
 ---
 
@@ -25,11 +29,11 @@ try it out at : https://marathi-setu.streamlit.app/
 ### Prerequisites
 
 - Python 3.9+
-- An internet connection (for translation and neural voice generation)
+- Internet connection (for Translation, Neural TTS, and OCR model download)
 
 ### Installation
 
-1. **Clone the repository** (or download the files):
+1. **Clone the repository**:
    ```bash
    git clone <repository-url>
    cd marathisetu
@@ -37,11 +41,11 @@ try it out at : https://marathi-setu.streamlit.app/
 
 2. **Install dependencies**:
    ```bash
-   pip install streamlit streamlit-mic-recorder deep-translator edge-tts
+   pip install streamlit streamlit-mic-recorder deep-translator edge-tts easyocr pillow numpy
    ```
 
 3. **Font Setup**:
-   Ensure the `lohit-marathi-regular` folder is present in the root directory to enable the native Marathi font.
+   The native Marathi font is included in the `lohit-marathi-regular` directory and is automatically loaded by the app.
 
 ---
 
@@ -51,21 +55,22 @@ try it out at : https://marathi-setu.streamlit.app/
    ```bash
    streamlit run app.py
    ```
-2. **Select Input Language**: Use the sidebar to choose between English, Hindi, or French.
-3. **Select Voice**: Choose between Aarohi (Female) or Manohar (Male) for the audio output.
-4. **Input Text**: 
-   - Click the 🎙️ **Start Speaking** button to use your microphone.
-   - Or type in the text box and click **Translate**.
-5. **Listen**: The translated Marathi text will appear, and the audio will play automatically.
+2. **Settings**: Use the sidebar to select your input language and your preferred voice (Aarohi or Manohar).
+3. **Translate**:
+   - **Voice**: In the first tab, click 🎙️ **Start Speaking**.
+   - **Text**: Type in the box and hit **Translate**.
+   - **OCR**: Switch to the **Scan Image** tab, upload a document, and click **Read & Translate**.
+4. **Listen**: Every translation generates a high-quality audio clip which plays automatically.
 
 ---
 
 ## 🛠️ Built With
 
-- [Streamlit](https://streamlit.io/) - The fastest way to build and share data apps.
-- [Deep Translator](https://github.com/nidhaloff/deep-translator) - Flexible translation tool.
-- [Edge-TTS](https://github.com/rany2/edge-tts) - Microsoft Edge neural TTS interface.
-- [Streamlit Mic Recorder](https://github.com/theevas/streamlit_mic_recorder) - For high-quality voice capture.
+- [Streamlit](https://streamlit.io/) - App framework.
+- [Deep Translator](https://github.com/nidhaloff/deep-translator) - Core translation engine.
+- [Edge-TTS](https://github.com/rany2/edge-tts) - Microsoft Azure neural voices.
+- [EasyOCR](https://github.com/JaidedAI/EasyOCR) - Powerful multi-language optical character recognition.
+- [Streamlit Mic Recorder](https://github.com/theevas/streamlit_mic_recorder) - Professional voice capture.
 
 ---
 
